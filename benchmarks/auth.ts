@@ -5,8 +5,8 @@ console.log(new Date().toString());
 suite
   .add("auth", function () {
     auth(
-      //@ts-ignore
       {
+        //@ts-ignore
         headers: {
           "x-jwt-payload":
             "ewogICJzdWIiOiAiMTIzc2Q0NTY3ODkwIiwKICAibmFtZSI6ICJKb2huIERvZSIsCiAgImV4cCI6IDE2ODI4MDYwMjMxMTksCiAgImFkbWluIjogdHJ1ZQp9",
