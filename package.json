@@ -9,7 +9,6 @@
     "clean": "rimraf build",
     "typedoc": "typedoc --readme ./README.md",
     "build": "npm run clean && tsc",
-    "postinstall": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch"
   },
