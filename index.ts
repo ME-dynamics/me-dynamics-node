@@ -11,5 +11,5 @@ export { webSocketClient } from "./src/web-socket";
 export { ErrorFactory } from "./src/errorFactory";
 export { nullToUndefined } from "./src/nullToUndefined";
 export { result } from "./src/result";
-export {} from "./src/undefinedToNull";
+export { undefinedToNull } from "./src/undefinedToNull";
 export { StatusCodes as statusCodes } from "http-status-codes";
