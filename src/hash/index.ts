@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { hash,  } from "argon2";
+import { hash } from "argon2";
 export function sha512(value: string): string {
   return createHash("sha512").update(value).digest("hex");
 }
