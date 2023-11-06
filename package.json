@@ -9,7 +9,7 @@
     "clean": "rimraf build",
     "typedoc": "typedoc --readme ./README.md",
     "build": "npm run clean && tsc",
-    "test": "jest",
+    "test": "npm run clean && jest",
     "test:watch": "jest --watch"
   },
   "devDependencies": {
