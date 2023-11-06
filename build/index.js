@@ -23,10 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.statusCodes = exports.undefinedToNull = exports.result = exports.nullToUndefined = exports.ErrorFactory = exports.webSocketClient = exports.time = exports.buildRouteGenerator = exports.secureRandomNumber = exports.buildLogger = exports.httpResult = exports.auth = exports.types = void 0;
+exports.statusCodes = exports.undefinedToNull = exports.result = exports.nullToUndefined = exports.ErrorFactory = exports.webSocketClient = exports.time = exports.buildRouteGenerator = exports.secureRandomNumber = exports.buildLogger = exports.httpResult = exports.hash = exports.auth = exports.types = void 0;
 exports.types = __importStar(require("./src/types"));
 var auth_1 = require("./src/auth");
 Object.defineProperty(exports, "auth", { enumerable: true, get: function () { return auth_1.auth; } });
+exports.hash = __importStar(require("./src/hash"));
 var http_result_1 = require("./src/http-result");
 Object.defineProperty(exports, "httpResult", { enumerable: true, get: function () { return http_result_1.httpResult; } });
 var logger_1 = require("./src/logger");

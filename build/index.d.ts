@@ -1,5 +1,6 @@
 export * as types from "./src/types";
 export { auth } from "./src/auth";
+export * as hash from "./src/hash";
 export { httpResult } from "./src/http-result";
 export { buildLogger } from "./src/logger";
 export { secureRandomNumber } from "./src/random-digits";
