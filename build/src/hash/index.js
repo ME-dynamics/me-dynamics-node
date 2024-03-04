@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.argon2 = exports.sha1 = exports.sha256 = exports.sha512 = void 0;
+exports.argon2Verify = exports.argon2 = exports.sha1 = exports.sha256 = exports.sha512 = void 0;
 const node_crypto_1 = require("node:crypto");
 const argon2_1 = require("argon2");
 function sha512(value) {
@@ -19,3 +19,7 @@ async function argon2(value) {
     return await (0, argon2_1.hash)(value);
 }
 exports.argon2 = argon2;
+async function argon2Verify(hashedValue, plainValue) {
+    return await (0, argon2_1.verify)(hashedValue, plainValue);
+}
+exports.argon2Verify = argon2Verify;
