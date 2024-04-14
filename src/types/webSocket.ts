@@ -23,7 +23,7 @@ export interface IWebSocketClient {
 export interface ISocket {
   ws: tWebSocket;
   lastActiveTime: number;
-  interval: NodeJS.Timer;
+  interval: NodeJS.Timeout;
 }
 
 export type tCloseEvent = CloseEvent;
