@@ -6,7 +6,7 @@ const { unauthorized } = httpResult.clientError;
 describe("auth function", () => {
   it("should return unauthorized if jwt is not defined", () => {
     const httpRequest = {
-      getHeader: jest.fn(() => undefined),
+      headers: {},
     };
     const roles = {
       admin: true,
@@ -24,13 +24,15 @@ describe("auth function", () => {
     const expiredJwt = {
       sub: "user-id",
       exp: Date.now() / 1000 - 3600,
-      admin: true
+      admin: true,
     };
     const jwtPayload = Buffer.from(JSON.stringify(expiredJwt)).toString(
       "base64"
     );
     const httpRequest = {
-      getHeader: jest.fn(() => jwtPayload),
+      headers: {
+        "x-jwt-payload": jwtPayload,
+      },
     };
     const roles = {
       admin: true,
@@ -53,7 +55,9 @@ describe("auth function", () => {
       "base64"
     );
     const httpRequest = {
-      getHeader: jest.fn(() => jwtPayload),
+      headers: {
+        "x-jwt-payload": jwtPayload,
+      },
     };
     const roles = {
       admin: true,
@@ -77,7 +81,9 @@ describe("auth function", () => {
       "base64"
     );
     const httpRequest = {
-      getHeader: jest.fn(() => jwtPayload),
+      headers: {
+        "x-jwt-payload": jwtPayload,
+      },
     };
     const roles = {
       provider: false,
@@ -99,11 +105,11 @@ describe("auth function", () => {
       exp: Date.now() + 3600,
       admin: true,
     };
-    const jwtPayload = Buffer.from(JSON.stringify(roleJwt)).toString(
-      "base64"
-    );
+    const jwtPayload = Buffer.from(JSON.stringify(roleJwt)).toString("base64");
     const httpRequest = {
-      getHeader: jest.fn(() => jwtPayload),
+      headers: {
+        "x-jwt-payload": jwtPayload,
+      },
     };
     // @ts-ignore
     const roles = {
@@ -122,7 +128,9 @@ describe("auth function", () => {
 
   it("should return unauthorized if jwt parsing fails", () => {
     const httpRequest = {
-      getHeader: jest.fn(() => "invalid-base64-data"),
+      headers: {
+        "x-jwt-payload": "invalid-base64-data",
+      },
     };
     const roles = {
       admin: true,
