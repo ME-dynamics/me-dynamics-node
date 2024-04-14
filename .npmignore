@@ -9,13 +9,12 @@ docs/
 
 __test__/
 benchmarks/
-src/
+
 index.ts
 .eslintignore
 .eslintrc.js
 .gitignore
 jest.config.js
-tsconfig.json
 typedoc.json
 npm-debug.log
 yarn-error.lock
