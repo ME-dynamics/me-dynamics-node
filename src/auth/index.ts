@@ -2,9 +2,9 @@ import { httpResult } from "../http-result";
 import type { tRequest, IRoles, IAuth } from "../types";
 
 const { unauthorized } = httpResult.clientError;
-const jwtHeader = new TextEncoder().encode("x-jwt-payload").buffer;
+// const jwtHeader = new TextEncoder().encode("x-jwt-payload").buffer;
 export function auth(httpRequest: tRequest, roles: IRoles): IAuth {
-  const jwtPayload = httpRequest.getHeader(jwtHeader);
+  const jwtPayload = httpRequest.headers["x-jwt-payload"];
   if (typeof jwtPayload !== "string") {
     return {
       success: false,

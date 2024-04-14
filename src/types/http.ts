@@ -1,10 +1,11 @@
 import {
-HttpRequest, HttpResponse
-} from "uWebSockets.js";
+  FastifyRequest,
+FastifyReply
+} from "fastify";
 
-export type tRequest = HttpRequest;
+export type tRequest = FastifyRequest;
 // http interfaces start
-export type tReply = HttpResponse;
+export type tReply = FastifyReply;
 // http interfaces end
 
 
