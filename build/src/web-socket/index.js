@@ -9,8 +9,10 @@ function webSocketClient(args) {
         lastActiveTime: 0,
         interval: setInterval(checkConnection, 1000),
     };
+    let timeout;
     function onClose(event) {
         events.close(event);
+        clearInterval(socket.interval);
         reconnect();
     }
     function onMessage(event) {
@@ -22,6 +24,7 @@ function webSocketClient(args) {
     }
     function onOpen(event) {
         socket.lastActiveTime = Date.now();
+        numberOfAttempts = 0;
         events.open(event);
     }
     function onPing(data) {
@@ -40,25 +43,38 @@ function webSocketClient(args) {
         socket.ws.on("ping", onPing);
         socket.ws.on("pong", onPong);
     }
-    // reconnect the socket
-    let reconnecting;
+    let reconnecting = false;
     let numberOfAttempts = 0;
+    function reconnectLogic() {
+        reconnecting = true;
+        events.onReconnect(numberOfAttempts);
+        socket.ws.close();
+        socket.lastActiveTime = 0;
+        socket.ws = new ws_1.WebSocket(wsUrl);
+        registerListeners();
+        reconnecting = false;
+    }
     function reconnect() {
         if (reconnecting)
             return;
         ++numberOfAttempts;
-        if (numberOfAttempts > 10) {
+        if (numberOfAttempts > 5) {
+            if (socket.ws) {
+                socket.ws.close();
+                onError({
+                    error: "exceeded_reconnect_attempt",
+                    message: "socket could not reconnect after 5 attempts",
+                    target: socket.ws,
+                    type: "handled",
+                });
+            }
+            clearTimeout(timeout);
             return;
         }
-        setTimeout(() => {
-            reconnecting = true;
-            events.onReconnect(numberOfAttempts);
-            socket.ws.close();
-            socket.lastActiveTime = 0;
-            socket.ws = new ws_1.WebSocket(wsUrl);
-            registerListeners();
-            reconnecting = false;
-        }, 1000 * numberOfAttempts);
+        if (numberOfAttempts === 1) {
+            reconnectLogic();
+        }
+        timeout = setTimeout(reconnectLogic, 1000 * numberOfAttempts);
     }
     function checkConnection() {
         if (!socket.ws) {
@@ -68,7 +84,7 @@ function webSocketClient(args) {
             return;
         }
         if (Date.now() - socket.lastActiveTime > inactiveTimeout * 1000) {
-            //   reconnect();
+            reconnect();
             console.log("reconnect", Date.now() - socket.lastActiveTime);
         }
     }

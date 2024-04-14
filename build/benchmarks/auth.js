@@ -9,8 +9,9 @@ const suite = new benchmark_1.default.Suite();
 console.log(new Date().toString());
 suite
     .add("auth", function () {
-    (0, auth_1.auth)({
-        //@ts-ignore
+    (0, auth_1.auth)(
+    //@ts-ignore
+    {
         headers: {
             "x-jwt-payload": "ewogICJzdWIiOiAiMTIzc2Q0NTY3ODkwIiwKICAibmFtZSI6ICJKb2huIERvZSIsCiAgImV4cCI6IDE2ODI4MDYwMjMxMTksCiAgImFkbWluIjogdHJ1ZQp9",
         },

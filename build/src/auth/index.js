@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
 const http_result_1 = require("../http-result");
 const { unauthorized } = http_result_1.httpResult.clientError;
-const jwtHeader = new TextEncoder().encode("x-jwt-payload").buffer;
+// const jwtHeader = new TextEncoder().encode("x-jwt-payload").buffer;
 function auth(httpRequest, roles) {
-    const jwtPayload = httpRequest.getHeader(jwtHeader);
+    const jwtPayload = httpRequest.headers["x-jwt-payload"];
     if (typeof jwtPayload !== "string") {
         return {
             success: false,
